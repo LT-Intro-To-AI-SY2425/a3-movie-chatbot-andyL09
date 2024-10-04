@@ -67,6 +67,7 @@ def title_by_year(matches: List[str]) -> List[str]:
     return result
 
 
+
 def title_by_year_range(matches: List[str]) -> List[str]:
     """Finds all movies made in the passed in year range
 
@@ -80,8 +81,13 @@ def title_by_year_range(matches: List[str]) -> List[str]:
         a list of movie titles made during those years, inclusive (meaning if you pass
         in ["1991", "1994"] you will get movies made in 1991, 1992, 1993 & 1994)
     """
-    pass
-
+    start_year = int(matches[0])
+    end_year = int(matches[1])
+    result = []
+    for movie in movie_db:
+        if start_year <= get_year(movie) <= end_year:
+            result.append(get_title(movie))
+    return result
 
 def title_before_year(matches: List[str]) -> List[str]:
     """Finds all movies made before the passed in year
@@ -94,7 +100,13 @@ def title_before_year(matches: List[str]) -> List[str]:
         a list of movie titles made before the passed in year, exclusive (meaning if you
         pass in 1992 you won't get any movies made that year, only before)
     """
-    pass
+    year = int(matches[0])
+    result = []
+    for movie in movie_db:
+        if get_year(movie) < year:
+            result.append(get_title(movie))
+    return result
+    #pass
 
 
 def title_after_year(matches: List[str]) -> List[str]:
@@ -108,7 +120,13 @@ def title_after_year(matches: List[str]) -> List[str]:
         a list of movie titles made after the passed in year, exclusive (meaning if you
         pass in 1992 you won't get any movies made that year, only after)
     """
-    pass
+    year = int(matches[0])
+    result = []
+    for movie in movie_db:
+        if get_year(movie) > year:
+            result.append(get_title(movie))
+    return result
+    #pass
 
 
 def director_by_title(matches: List[str]) -> List[str]:
@@ -299,4 +317,3 @@ if __name__ == "__main__":
     ) == sorted(["No answers"]), "failed search_pa_list test 3"
 
     print("All tests passed!")
-    
